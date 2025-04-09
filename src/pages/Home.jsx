@@ -5,7 +5,7 @@ const Home = ({ username, setUsername, room, setRoom, socket }) => {
     const joinRoom = () => {
         if (room !== '' && username !== '') {
             setTimeout(() => {
-                
+
                 socket.emit('join_room', { username, room });
             }, 100); // wait for Chat to mount
             navigate('/chat', { replace: true });
@@ -38,9 +38,9 @@ const Home = ({ username, setUsername, room, setRoom, socket }) => {
                 >
                     Join Room
                 </button>
+                <button className='px-3 py-1 bg-green-800 rounded-md text-white text-sm cursor-pointer' onClick={() => navigate('/chats/private', { replace: true })}>Direct Messages</button>
             </div>
             <div>
-                <button className='px-3 py-1 bg-green-800 rounded-md text-white text-sm cursor-pointer' onClick={() => navigate('/chats/private', { replace: true })}>Direct Messages</button>
             </div>
         </div>
     );

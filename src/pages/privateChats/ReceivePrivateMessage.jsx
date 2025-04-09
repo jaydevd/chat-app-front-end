@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 
 const ReceivePrivateMessage = ({ socket }) => {
-    const [messagesRecieved, setMessagesReceived] = useState([]);
-
+    const [messagesReceived, setMessagesReceived] = useState([]);
+    const [fromUser, setFromUser] = useState('');
     // Runs whenever a socket event is received from the server
     useEffect(() => {
         socket.on('privateMessage', ({ from, msg }) => {
+            console.log(msg);
+            setFromUser(from);
+            setMessagesReceived([...messagesReceived, msg])
             console.log(`Private message from ${from}: ${msg}`);
         });
 
@@ -21,15 +24,16 @@ const ReceivePrivateMessage = ({ socket }) => {
 
     return (
         <div>
-            {messagesRecieved.map((msg, i) => (
+            <p>received msgs</p>
+            {messagesReceived.map((msg, i) => (
                 <div key={i}>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span>{msg.username}</span>
-                        <span>
+                        <span>{fromUser}</span>
+                        {/* <span>
                             {formatDateFromTimestamp(msg.__createdtime__)}
-                        </span>
+                        </span> */}
                     </div>
-                    <p>{msg.message}</p>
+                    <p>hello {msg}</p>
                     <br />
                 </div>
             ))}

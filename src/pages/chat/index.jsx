@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import MessagesReceive from './MessageReceive';
 import SendMessage from './SendMessage';
 
 const Chat = ({ username, room, socket }) => {
+    const navigate = useNavigate();
     return (
         <div>
             <div>

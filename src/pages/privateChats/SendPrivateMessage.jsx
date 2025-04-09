@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-
 const SendPrivateMessage = ({ socket, username, room }) => {
     const [message, setMessage] = useState('');
+    const [toUser, setToUser] = useState('');
 
     socket.on('privateMessage', ({ from, msg }) => {
         console.log(`Private message from ${from}: ${msg}`);
@@ -16,14 +16,21 @@ const SendPrivateMessage = ({ socket, username, room }) => {
         }
     };
 
+    const onInputChange = (e) => {
+        setToUser(e.target.value);
+    }
+
     return (
         <div>
+            <input type="text" name="toUser" id="" onChange={onInputChange} placeholder="send to..." className='bg-neutral-200 rounded-md px-4 py-2 m-2' />
+
             <input
                 placeholder='Message...'
                 onChange={(e) => setMessage(e.target.value)}
                 value={message}
+                className='bg-neutral-200 rounded-md px-4 py-2 m-2'
             />
-            <button className='btn btn-primary' onClick={sendMessage}>
+            <button className='bg-sky-400 rounded-md px-3 py-2 text-white' onClick={sendMessage}>
                 Send Message
             </button>
         </div>

@@ -33,7 +33,7 @@ function App() {
           />
           <Route
             path='/chats/private'
-            element={<PrivateChats username={username} room={room} socket={socket} />}
+            element={<PrivateChats socket={socket} />}
           />
         </Routes>
       </div>
